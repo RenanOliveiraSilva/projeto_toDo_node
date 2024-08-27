@@ -1,0 +1,142 @@
+body {
+    font-family: Arial, sans-serif;
+    background-color: #f4f4f4;
+    margin: 0;
+    padding: 10px 0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font: 14px "Lucida Grande", Helvetica, Arial, sans-serif
+}
+
+.container {
+    background-color: #fff;
+    padding: 20px 30px;
+    border-radius: 10px;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+    height: fit-content;
+    max-width: 600px;
+    width: 100%;  
+}
+
+h1 {
+    text-align: center;
+    color: #333;
+    margin-top: 0;
+    margin-bottom: 20px;
+}
+
+.todo-form {
+    display: flex;
+    margin-bottom: 20px;
+}
+
+.todo-input {
+    flex: 1;
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 5px 0 0 5px;
+    outline: none;
+}
+
+.todo-submit {
+    background-color: #28a745;
+    color: white;
+    padding: 10px 15px;
+    border: none;
+    border-radius: 0 5px 5px 0;
+    cursor: pointer;
+}
+
+.todo-submit:hover {
+    background-color: #218838;
+}
+
+.todo-list {
+    list-style: none;
+    padding: 0;
+    width: 100%;
+}
+
+.todo-item {  
+    display: flex;
+    flex: 1;
+    flex-direction: column;
+    background-color: #f9f9f9;
+    padding: 15px;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+    margin-bottom: 10px;
+    justify-content: space-between;
+    align-items: start;
+}
+
+.todo-item p {  
+    font-size: 15px;
+}
+
+.todo-text {
+    margin: 0;
+    color: #555;
+    margin-bottom: 10px;
+}
+
+button {
+    background-color: #dc3545;
+    color: white;
+    border: none;
+    padding: 5px 10px;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+.actions {
+    width: 100%;
+    display: flex;
+    justify-content: end;
+}
+
+.actions button {
+    color: white;
+    border: none;
+    padding: 8px 10px;
+    border-radius: 5px;
+    cursor: pointer;
+    margin-left: 10px;
+}
+
+.warning {
+    background-color: #e2ad0e;
+}
+
+.warning:hover {
+    background-color: #b89221;
+}
+
+.warning:active {
+    background-color: #997b20;
+}
+
+.success {
+    background-color: #28a745;
+}
+
+.success:hover {
+    background-color: #218838;
+}
+
+.success:active {
+    background-color: #1e7e34;
+}
+
+.danger {
+    background-color: #e13244;
+}
+
+.danger:hover {
+    background-color: #c82333;
+}
+
+.danger:active {
+    background-color: #bd2130;
+}

@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel='stylesheet' href='/stylesheets/styleCadastro.css' />
+    <title>Document</title>
+</head>
+<body>
+    <div class="container">
+        <h1>Criar Nova Tarefa</h1>
+        <%= isDateGreaterOrEqual() %>
+        
+        <form action="/cadastrar/inserir" method="POST" class="todo-form">
+    
+            <label for="nome">Nome da Atividade</label>
+            <input type="text" name="nome" class="todo-input" id="nome" value="<%= nomeTarefa %>" required>
+    
+            <label for="dataTo">Data</label>
+            <input type="date" name="dataTo" class="todo-input" id="dataTo" required>
+    
+            <button type="submit">Cadastrar</button>
+        </form>
+
+    </div>
+
+</body>
+</html>

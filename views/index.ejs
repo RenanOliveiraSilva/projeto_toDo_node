@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <link rel='stylesheet' href='/stylesheets/styleIndex.css' />
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Home</title>
+  </head>
+  <body>
+    <div class="container">
+      <h1>Minhas Tarefas</h1>
+      <form class="todo-form" method="post" action="/cadastrar">
+          <input type="text" class="todo-input" name="nomeTarefa" placeholder="Adicionar uma nova Tarefa" required>
+          <button type="submit" class="todo-submit">Adicionar</button>
+      </form>
+      <ul class="todo-list">
+          <% atividades.forEach(element => { %>
+            <li class="todo-item">
+              <div class="title">
+                <h2 class="todo-text"><%= element.nome %></h2>
+
+              </div>
+              <p class="todo-text">Dia do Vencimento: = <%= element.dataFormatada %> </p>
+              <p class="todo-text">Status: <%= element.status %></p>
+              <div class="actions">
+                  <a href="/editar/<%= element._id %>"><button class="warning"><img src="/images/editar.png" width="15px" height="15px"></button></a>
+                  <a href="/concluir/<%= element._id %>" onclick="return confirm('Deseja realmente concluir a Tarefa?')"><button class="success"><img src="/images/aceitar.png" width="15px" height="15px"></button></a>
+                  <a href="/deletar/<%= element._id %>" onclick="return confirm('Deseja realmente excluir a Tarefa?')"><button class="danger"><img src="/images/excluir.png" width="15px" height="15px"></button></a>
+              </div>
+            </li>
+          <% }); %>
+         
+      </ul>
+    </div>
+
+  </body>
+</html>
