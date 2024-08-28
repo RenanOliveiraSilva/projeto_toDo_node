@@ -15,12 +15,15 @@
             <input type="text" name="nome" class="todo-input" id="nome" value="<%= tarefa.nome %>" required>
 
             <label for="dataTo">Data</label>
-            <input type="date" name="dataTo" class="todo-input" id="dataTo" value="<%= format(tarefa.dataTo, 'yyyy-MM-dd') %>"  required>
+            <input type="date" name="dataTo" class="todo-input" id="dataTo" value="<%= tarefa.dataFormatada %>" min="<%= dataHoje %>"  required>
             
+            <label for="descricao">Descrição</label>
+            <textarea name="descricao" class="todo-textarea" id="descricao" maxlength="140" required><%= tarefa.descricao %></textarea>
+
             <label for="status">Status</label>
             <select name="status" id="status" class="todo-select " required>
-                <option value="Pendente">Pendente</option>
-                <option value="Concluido">Concluído</option>
+                <option value="Pendente" <%= tarefa.status === "Pendente" ? "selected" : "" %>>Pendente</option>
+                <option value="Concluido" <%= tarefa.status === "Concluido" ? "selected" : "" %>>Concluído</option>
             </select>
             <button type="submit">Cadastrar</button>
         </form>

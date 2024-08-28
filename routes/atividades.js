@@ -4,9 +4,10 @@ const { ObjectId } = require('mongodb');
 const ToDo = require('../models/ToDo');
 const { isAfter, isEqual, parseISO, format } = require('date-fns');
 
+
 const moment = require('moment-timezone');
 const { ptBR } = require("date-fns/locale");
-
+const dataHoje = moment().format('YYYY-MM-DD');
 
 
 //Rota para listar todos as atividades
@@ -30,7 +31,6 @@ router.get('/', async (req, res) => {
 //Rota para o formulário de cadastro
 router.post('/', function(req, res) {
   const nomeTarefa = req.body.nomeTarefa;
-  const dataHoje = moment().format('YYYY-MM-DD');
   res.render('atividadeCadastro.ejs', { nomeTarefa, dataHoje  });
 
 });
@@ -51,7 +51,11 @@ router.post('/inserir', async(req, res) => {
 router.get('/editar/:id', async(req, res) => {
   try {
     const tarefa = await ToDo.findById(req.params.id);
-    res.render("editarTarefa", { tarefa, format, ptBR });
+
+    const formattedDateUTC = moment.utc(tarefa.dataTo).format('yyyy-MM-DD');
+    tarefa.dataFormatada = formattedDateUTC;
+  
+    res.render("editarTarefa", { tarefa, dataHoje });
   } catch (err) {
     res.status(500).send(err.message);
   }

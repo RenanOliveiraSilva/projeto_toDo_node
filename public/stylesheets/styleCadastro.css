@@ -111,6 +111,8 @@ h1 {
     border-style: none;
     border: 1px solid #ccc;
     border-radius: 5px;
+    font: 14px "Lucida Grande", Helvetica, Arial, sans-serif;
+    padding: 8px;
 }
 
 .todo-textarea:focus {
