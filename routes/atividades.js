@@ -8,6 +8,9 @@ const moment = require('moment-timezone');
 
 const { ptBR } = require("date-fns/locale");
 
+
+const testDate = '2024-08-07T00:00:00.000+00:00';
+
 const timeZone = 'America/Sao_Paulo';
 
 //Rota para listar todos as atividades
@@ -17,8 +20,9 @@ router.get('/', async (req, res) => {
 
       // Formate a data para cada atividade antes de passar para o template
       atividades.forEach(atividade => {
-          const zonedTime = moment.tz("2024-08-07T00:00:00.000+00:00", timeZone).format('dd/MM/yyyy');
-          atividade.dataFormatada = format(zonedTime, 'dd/MM/yyyy', { locale: ptBR });
+          console.log(atividade.dataTo)
+          const formattedDateUTC = moment.utc(atividade.dataTo).format('DD/MM/YYYY HH:mm:ss');
+          atividade.dataFormatada = format(formattedDateUTC, 'dd/MM/yyyy', { locale: ptBR });
       });
       res.render("index", { atividades });
 
@@ -30,7 +34,7 @@ router.get('/', async (req, res) => {
 //Rota para o formulário de cadastro
 router.post('/', function(req, res) {
   const nomeTarefa = req.body.nomeTarefa;
-  res.render('atividadeCadastro.ejs', { nomeTarefa, isDateGreaterOrEqual });
+  res.render('atividadeCadastro.ejs', { nomeTarefa });
 
 });
 
