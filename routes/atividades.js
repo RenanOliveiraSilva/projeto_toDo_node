@@ -30,15 +30,16 @@ router.get('/', async (req, res) => {
 //Rota para o formulário de cadastro
 router.post('/', function(req, res) {
   const nomeTarefa = req.body.nomeTarefa;
-  res.render('atividadeCadastro.ejs', { nomeTarefa });
+  const dataHoje = moment().format('YYYY-MM-DD');
+  res.render('atividadeCadastro.ejs', { nomeTarefa, dataHoje  });
 
 });
 
 //Rotas para cadastrar nova tarefa
 router.post('/inserir', async(req, res) => {
-  const { nome, dataTo } = req.body;
+  const { nome, dataTo, descricao } = req.body;
   try{
-    const novaTarefa = new ToDo({nome, dataTo });
+    const novaTarefa = new ToDo({nome, dataTo, descricao });
     await novaTarefa.save();
     res.redirect("/");
   } catch(err) {
