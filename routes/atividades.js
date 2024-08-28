@@ -8,7 +8,7 @@ const { isAfter, isEqual, parseISO, format } = require('date-fns');
 const moment = require('moment-timezone');
 const { ptBR } = require("date-fns/locale");
 const dataHoje = moment().format('YYYY-MM-DD');
-
+const dataHojeSemFormato = moment().format('DD/MM/yyyy');;
 
 //Rota para listar todos as atividades
 router.get('/', async (req, res) => {
@@ -20,8 +20,8 @@ router.get('/', async (req, res) => {
           const formattedDateUTC = moment.utc(atividade.dataTo).format('DD/MM/YYYY');
           atividade.dataFormatada = formattedDateUTC;
       });
-
-      res.render("index", { atividades });
+      
+      res.render("index", { atividades, dataHoje, dataHojeSemFormato });
 
   } catch (err) {
       res.status(500).send(err.message);
@@ -63,9 +63,9 @@ router.get('/editar/:id', async(req, res) => {
 
 //Rota para atualizar a tarefa
 router.post('/atualizar/:id', async(req, res) => {
-  const { nome, dataTo,status } = req.body;
+  const { nome, dataTo, descricao, status } = req.body;
   try {
-    await ToDo.findByIdAndUpdate(req.params.id, { nome, dataTo, status });
+    await ToDo.findByIdAndUpdate(req.params.id, { nome, dataTo, descricao, status });
     res.redirect("/");
   } catch (err) {
     res.status(500).send(err.message);

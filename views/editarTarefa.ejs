@@ -9,7 +9,6 @@
 <body>
     <div class="container">
         <h1>Editar Tarefas</h1>
-        
         <form action="/cadastrar/atualizar/<%= tarefa._id %>" method="POST" class="todo-form">
             <label for="nome">Nome da Atividade</label>
             <input type="text" name="nome" class="todo-input" id="nome" value="<%= tarefa.nome %>" required>
@@ -18,12 +17,12 @@
             <input type="date" name="dataTo" class="todo-input" id="dataTo" value="<%= tarefa.dataFormatada %>" min="<%= dataHoje %>"  required>
             
             <label for="descricao">Descrição</label>
-            <textarea name="descricao" class="todo-textarea" id="descricao" maxlength="140" required><%= tarefa.descricao %></textarea>
+            <textarea name="descricao" class="todo-textarea" id="descricao" maxlength="140"><%= tarefa.descricao %></textarea>
 
             <label for="status">Status</label>
             <select name="status" id="status" class="todo-select " required>
                 <option value="Pendente" <%= tarefa.status === "Pendente" ? "selected" : "" %>>Pendente</option>
-                <option value="Concluido" <%= tarefa.status === "Concluido" ? "selected" : "" %>>Concluído</option>
+                <option value="Concluido" <%= tarefa.status === "Concluída" ? "selected" : "" %>>Concluído</option>
             </select>
             <button type="submit">Cadastrar</button>
         </form>

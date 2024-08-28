@@ -18,14 +18,32 @@
             <li class="todo-item">
               <div class="title">
                 <h2 class="todo-text"><%= element.nome %></h2>
-
               </div>
               <p class="todo-text">Dia do Vencimento: <%= element.dataFormatada %> </p>
-              <p class="todo-text">Status: <%= element.status %></p>
+              
+              <% if (element.descricao !== "") { %> <p class="todo-text">Descrição: <%= element.descricao %></p> <% } %>
               <div class="actions">
+                <div class="status_tarefa">
+                    <% 
+                      let dataFormatadaDate = new Date(element.dataTo);
+                      let dataHojeDate = new Date(dataHojeSemFormato);  
+                    %>
+                    <% if (element.status == "Pendente" && dataHojeDate > element.dataTo ) { %>
+                      <% console.log(element.dataTo, dataHojeDate) %>
+                      <p class="todo-status">Status A: <%= element.status %></p>
+                      <% } else if (element.status == "Pendente") { %>
+                      <p class="todo-status">Status P: <%= element.status %></p>
+                    <% } else { %>
+                      <p class="todo-status">Status C: <%= element.status %></p>
+                    <% } %>
+                    <% console.log(element.dataTo, dataHojeDate) %>
+                </div>
+                  
+                <div class="buttons">
                   <a href="/editar/<%= element._id %>"><button class="warning"><img src="/images/editar.png" width="15px" height="15px"></button></a>
                   <a href="/concluir/<%= element._id %>" onclick="return confirm('Deseja realmente concluir a Tarefa?')"><button class="success"><img src="/images/aceitar.png" width="15px" height="15px"></button></a>
                   <a href="/deletar/<%= element._id %>" onclick="return confirm('Deseja realmente excluir a Tarefa?')"><button class="danger"><img src="/images/excluir.png" width="15px" height="15px"></button></a>
+                </div>
               </div>
             </li>
           <% }); %>
