@@ -5,25 +5,21 @@ const ToDo = require('../models/ToDo');
 const { isAfter, isEqual, parseISO, format } = require('date-fns');
 
 const moment = require('moment-timezone');
-
 const { ptBR } = require("date-fns/locale");
 
 
-const testDate = '2024-08-07T00:00:00.000+00:00';
-
-const timeZone = 'America/Sao_Paulo';
 
 //Rota para listar todos as atividades
 router.get('/', async (req, res) => {
   try {
       const atividades = await ToDo.find();
 
-      // Formate a data para cada atividade antes de passar para o template
+      // Manter a data em UTC
       atividades.forEach(atividade => {
-          console.log(atividade.dataTo)
-          const formattedDateUTC = moment.utc(atividade.dataTo).format('DD/MM/YYYY HH:mm:ss');
-          atividade.dataFormatada = format(formattedDateUTC, 'dd/MM/yyyy', { locale: ptBR });
+          const formattedDateUTC = moment.utc(atividade.dataTo).format('DD/MM/YYYY');
+          atividade.dataFormatada = formattedDateUTC;
       });
+
       res.render("index", { atividades });
 
   } catch (err) {
