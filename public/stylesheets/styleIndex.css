@@ -80,16 +80,48 @@ h1 {
     color: #555;
     margin-bottom: 10px;
 }
-.status_tarefa {
+
+.status_tarefa_a {
     margin: 0;
     font-size: 16px !important;
-    background-color: #e2ad0e;
-    padding: 5px 10px;
+    background-color: #d14150;
+    padding: 10px 15px;
     border-radius: 5px;
 }
-.todo-status {
+
+.todo-status-a {
     margin: 0;
-    color: #f9f9f9 !important;
+    color: #f9d4d8 !important;
+    font-size: 16px !important;
+    font-style: italic !important;
+}
+
+.status_tarefa_p {
+    margin: 0;
+    font-size: 16px !important;
+    background-color: #d1be41;
+    padding: 10px 15px;
+    border-radius: 5px;
+}
+
+.todo-status-p {
+    margin: 0;
+    color: #f9efd4 !important;
+    font-size: 16px !important;
+    font-style: italic !important;
+}
+
+.status_tarefa_c {
+    margin: 0;
+    font-size: 16px !important;
+    background-color: #41d146;
+    padding: 10px 15px;
+    border-radius: 5px;
+}
+
+.todo-status-c {
+    margin: 0;
+    color: #dcf9d4 !important;
     font-size: 16px !important;
     font-style: italic !important;
 }
@@ -100,6 +132,18 @@ button {
     border: none;
     padding: 5px 10px;
     border-radius: 5px;
+    cursor: pointer;
+}
+
+button[disabled] {
+    pointer-events: none;
+    opacity: 0.5;
+    background-color: #ccc;
+    color: #999;
+    
+}
+
+button[disabled]:hover {
     cursor: pointer;
 }
 

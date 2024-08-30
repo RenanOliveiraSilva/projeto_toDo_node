@@ -23,26 +23,41 @@
               
               <% if (element.descricao !== "") { %> <p class="todo-text">Descrição: <%= element.descricao %></p> <% } %>
               <div class="actions">
-                <div class="status_tarefa">
+                <div class="status">
                     <% 
                       let dataFormatadaDate = new Date(element.dataTo);
-                      let dataHojeDate = new Date(dataHojeSemFormato);  
+                      let dataHojeDate = new Date(dataHoje);  
                     %>
-                    <% if (element.status == "Pendente" && dataHojeDate > element.dataTo ) { %>
-                      <% console.log(element.dataTo, dataHojeDate) %>
-                      <p class="todo-status">Status A: <%= element.status %></p>
+                    <% if (element.status == "Pendente" && dataHojeDate > dataFormatadaDate ) { %>
+                      <div class="status_tarefa_a">
+                        <p class="todo-status-a">Atrasada</p>
+
+                      </div>
                       <% } else if (element.status == "Pendente") { %>
-                      <p class="todo-status">Status P: <%= element.status %></p>
+                        <div class="status_tarefa_p">
+                          <p class="todo-status-p"><%= element.status %></p>
+                        </div>
                     <% } else { %>
-                      <p class="todo-status">Status C: <%= element.status %></p>
+                      <div class="status_tarefa_c">
+                        <p class="todo-status-c"><%= element.status %></p>
+                        
+                      </div>
                     <% } %>
-                    <% console.log(element.dataTo, dataHojeDate) %>
                 </div>
                   
                 <div class="buttons">
-                  <a href="/editar/<%= element._id %>"><button class="warning"><img src="/images/editar.png" width="15px" height="15px"></button></a>
-                  <a href="/concluir/<%= element._id %>" onclick="return confirm('Deseja realmente concluir a Tarefa?')"><button class="success"><img src="/images/aceitar.png" width="15px" height="15px"></button></a>
-                  <a href="/deletar/<%= element._id %>" onclick="return confirm('Deseja realmente excluir a Tarefa?')"><button class="danger"><img src="/images/excluir.png" width="15px" height="15px"></button></a>
+                  <button class="warning" onclick="window.location.href='/editar/<%= element._id %>'">
+                    <img src="/images/editar.png" width="15px" height="15px">
+                  </button>
+                  <button class="success" 
+                          onclick="if(confirm('Deseja realmente Concluir a Tarefa?')) { window.location.href='/concluir/<%= element._id %>'; } return false;" 
+                          <%= element.status === 'Concluída' ? 'disabled' : '' %>
+                  >
+                    <img src="/images/aceitar.png" width="15px" height="15px">
+                  </button>
+                  <button class="danger" onclick="if(confirm('Deseja realmente Concluir a Tarefa?')) { window.location.href='/deletar/<%= element._id %>'; } return false;">
+                    <img src="/images/excluir.png" width="15px" height="15px">
+                  </button>
                 </div>
               </div>
             </li>

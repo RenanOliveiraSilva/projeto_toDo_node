@@ -7,8 +7,8 @@ const { isAfter, isEqual, parseISO, format } = require('date-fns');
 
 const moment = require('moment-timezone');
 const { ptBR } = require("date-fns/locale");
-const dataHoje = moment().format('YYYY-MM-DD');
-const dataHojeSemFormato = moment().format('DD/MM/yyyy');;
+const dataHojeFormatada = moment().format('YYYY-MM-DD');
+const dataHoje = moment().utc().startOf('day').format('YYYY-MM-DDTHH:mm:ss.SSS[Z]');
 
 //Rota para listar todos as atividades
 router.get('/', async (req, res) => {
@@ -21,7 +21,7 @@ router.get('/', async (req, res) => {
           atividade.dataFormatada = formattedDateUTC;
       });
       
-      res.render("index", { atividades, dataHoje, dataHojeSemFormato });
+      res.render("index", { atividades, dataHoje, dataHoje });
 
   } catch (err) {
       res.status(500).send(err.message);
@@ -31,7 +31,7 @@ router.get('/', async (req, res) => {
 //Rota para o formulário de cadastro
 router.post('/', function(req, res) {
   const nomeTarefa = req.body.nomeTarefa;
-  res.render('atividadeCadastro.ejs', { nomeTarefa, dataHoje  });
+  res.render('atividadeCadastro.ejs', { nomeTarefa, dataHoje, dataHojeFormatada  });
 
 });
 
@@ -55,7 +55,7 @@ router.get('/editar/:id', async(req, res) => {
     const formattedDateUTC = moment.utc(tarefa.dataTo).format('yyyy-MM-DD');
     tarefa.dataFormatada = formattedDateUTC;
   
-    res.render("editarTarefa", { tarefa, dataHoje });
+    res.render("editarTarefa", { tarefa, dataHojeFormatada });
   } catch (err) {
     res.status(500).send(err.message);
   }
