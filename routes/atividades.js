@@ -2,11 +2,8 @@ const express = require('express');
 const router = express.Router();
 const { ObjectId } = require('mongodb');
 const ToDo = require('../models/ToDo');
-const { isAfter, isEqual, parseISO, format } = require('date-fns');
-
-
 const moment = require('moment-timezone');
-const { ptBR } = require("date-fns/locale");
+
 const dataHojeFormatada = moment().format('YYYY-MM-DD');
 const dataHoje = moment().utc().startOf('day').format('YYYY-MM-DDTHH:mm:ss.SSS[Z]');
 
@@ -14,14 +11,15 @@ const dataHoje = moment().utc().startOf('day').format('YYYY-MM-DDTHH:mm:ss.SSS[Z
 router.get('/', async (req, res) => {
   try {
       const atividades = await ToDo.find();
-
+      const atividadesOrdenadas = orderByDate(atividades);
+      
       // Manter a data em UTC
       atividades.forEach(atividade => {
           const formattedDateUTC = moment.utc(atividade.dataTo).format('DD/MM/YYYY');
           atividade.dataFormatada = formattedDateUTC;
       });
-      
-      res.render("index", { atividades, dataHoje, dataHoje });
+
+      res.render("index", { atividades: atividadesOrdenadas, dataHoje, dataHoje });
 
   } catch (err) {
       res.status(500).send(err.message);
@@ -95,5 +93,22 @@ router.get('/concluir/:id', async (req, res) => {
   }
 });
 
+//Funções
+function orderByDate(atividades) {
+  const atividadesOrdenadas = atividades
+      .map(atividade => {
+          // Adiciona a data formatada ao objeto de atividade
+          return {
+              ...atividade._doc, // Espalha os dados originais da atividade
+              dataFormatada: moment.utc(atividade.dataTo).format('DD/MM/YYYY')
+          };
+      })
+      .sort((a, b) => {
+          // Ordena da maior para a menor data
+          return new Date(a.dataTo) - new Date(b.dataTo);
+      });
+
+  return atividadesOrdenadas;
+}
 
 module.exports = router;

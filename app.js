@@ -10,12 +10,9 @@ const mongoose = require('mongoose');
 const app = express();
 
 //Conexão com o banco de dados
-mongoose.connect("mongodb://localhost:27017/ToDo", {
-  useNewUrlParser: true,
-  useUnifiedTopology: true,
-
-}).then(() => console.log("Conexão com o MongoDB realizada com sucesso!"))
-.catch(err => console.log("Erro: " + err));
+mongoose.connect("mongodb://localhost:27017/ToDo", {})
+        .then(() => console.log("Conexão com o MongoDB realizada com sucesso!"))
+        .catch(err => console.log("Erro: " + err));
 
 
 // view engine setup

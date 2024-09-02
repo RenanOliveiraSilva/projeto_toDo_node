@@ -19,11 +19,36 @@ body {
     width: 100%;  
 }
 
+.title {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    flex-direction: row;
+    margin-bottom: 20px;
+    width: 100%;
+}
+
+
+
+.title img {
+    width: 30px;
+    height: 30px;
+}
+
+.title-text {
+    text-align: right;
+    flex: 1;
+}
+
+.title-icon {
+    text-align: right;
+    width: 33%;
+}
+
 h1 {
-    text-align: center;
     color: #333;
     margin-top: 0;
-    margin-bottom: 20px;
+    margin-bottom: 0 !important;
 }
 
 .todo-form {
@@ -79,6 +104,14 @@ h1 {
     margin: 0;
     color: #555;
     margin-bottom: 10px;
+}
+
+.title-list {
+    display: flex;
+    justify-content: start;
+    align-items: center;
+    flex-direction: row;
+
 }
 
 .status_tarefa_a {
